@@ -26,7 +26,7 @@ namespace TaskTest.ServerFramework
                 () => World.Instance.CreateRoom(cmd.pId),
                 (sess, room) =>
                 {
-                    sess.Send(room.rId);
+                    sess.Reply(room.rId);
                 },
                 session);
         }
@@ -42,7 +42,7 @@ namespace TaskTest.ServerFramework
                 () => room.Start(),
                 (sess, time) =>
                 {
-                    sess.Send(time);
+                    sess.Reply(time);
                 },
                 session);
         }
@@ -56,9 +56,10 @@ namespace TaskTest.ServerFramework
             var room = World.Instance.GetRoom(cmd.head.rId);
             World.Instance.InvokeAction(
                 () => room.Jump(cmd.head.pId),
-                (sess, ret) => sess.Send(ret),
+                (sess, ret) => sess.Reply(ret),
                 session
                 );
         }
     }
+
 }

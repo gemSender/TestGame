@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
 
 namespace TaskTest.ServerFramework
 {
@@ -10,10 +11,19 @@ namespace TaskTest.ServerFramework
     {
         public byte[] dataBuff = new byte[1024];
 
-        public void Send(ValueType data)
+        public bool Reply(ValueType data)
         {
-            int len = Utility.WriteStructToBuffer(data, dataBuff, 0);
-            TrySend(dataBuff, 0, len);
+            int len1 = Utility.WriteStructToBuffer(MessageType.RpcReply, dataBuff, 0);
+            int len2 = Utility.WriteStructToBuffer(data, dataBuff, len1);
+            return TrySend(dataBuff, 0, len1 + len2);
+        }
+
+        public bool Rpc(GameCommand.UserCommandType command, ValueType arg)
+        {
+            int len1 = Utility.WriteStructToBuffer(MessageType.RpcCall, dataBuff, 0);
+            int len2 = Utility.WriteStructToBuffer(command, dataBuff, len1);
+            int len3 = Utility.WriteStructToBuffer(arg, dataBuff, len2);
+            return TrySend(dataBuff, 0, len1 + len2 + len3);
         }
     }
 }

@@ -72,20 +72,25 @@ namespace TaskTest.Game
             }
             if (i < players.Count)
             {
-                for (int j = 0; j < i; j++)
-                {
-                    var item = players[j];
-                    //BroamCast To Every Players
-                }
-
-                for (int j = i + 1; i < players.Count; j++)
-                {
-                    var item = players[j];
-                    //BroamCast To Every Players
-                }
+                Rpc(i, GameCommand.UserCommandType.Jump, players[i].id);
                 return true;
             }
             return false;
+        }
+
+        public void Rpc(int expIndex, GameCommand.UserCommandType type, ValueType arg)
+        {
+            for (int j = 0; j < expIndex; j++)
+            {
+                var item = players[j];
+                item.session.Rpc(type, arg);
+            }
+
+            for (int j = expIndex + 1; j < players.Count; j++)
+            {
+                var item = players[j];
+                item.session.Rpc(type, arg);
+            }
         }
         public float Start()
         {

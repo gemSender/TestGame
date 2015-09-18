@@ -85,10 +85,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerFramework\Command\GameCommand.cs" />
+    <Compile Include="ServerFramework\Common\MessageType.cs" />
     <Compile Include="ServerFramework\GameReceiverFilter.cs" />
     <Compile Include="ServerFramework\GameServer.cs" />
     <Compile Include="ServerFramework\GameSession.cs" />
-    <Compile Include="ServerFramework\UserCommandType.cs" />
+    <Compile Include="ServerFramework\Common\UserCommandType.cs" />
     <Compile Include="ServerFramework\UserUdpRequest.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
