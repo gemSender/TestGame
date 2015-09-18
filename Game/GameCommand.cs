@@ -1,5 +1,10 @@
 ﻿namespace GameCommand
 {
+    public struct RoomPlayerHead
+    {
+        public int pId;
+        public int rId;
+    }
     public struct CreateRoom
     {
         public int pId;
@@ -8,7 +13,11 @@
 
     public struct StartGame
     {
-        public int pId;
-        public int rId;
+        public RoomPlayerHead head;
+    }
+
+    public struct Jump
+    {
+        public RoomPlayerHead head;
     }
 }

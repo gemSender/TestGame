@@ -37,7 +37,7 @@ namespace TaskTest.ServerFramework
         public override void ExecuteCommand(GameSession session, UserUdpRequest requestInfo)
         {
             var cmd = GetCommandStruct(requestInfo);
-            var room = World.Instance.GetRoom(cmd.rId);
+            var room = World.Instance.GetRoom(cmd.head.rId);
             World.Instance.InvokeAction(
                 () => room.Start(),
                 (sess, time) =>
@@ -45,6 +45,20 @@ namespace TaskTest.ServerFramework
                     sess.Send(time);
                 },
                 session);
+        }
+    }
+
+    public class Jump : GameCommandBase<GameCommand.Jump>
+    {
+        public override void ExecuteCommand(GameSession session, UserUdpRequest requestInfo)
+        {
+            var cmd = GetCommandStruct(requestInfo);
+            var room = World.Instance.GetRoom(cmd.head.rId);
+            World.Instance.InvokeAction(
+                () => room.Jump(cmd.head.pId),
+                (sess, ret) => sess.Send(ret),
+                session
+                );
         }
     }
 }

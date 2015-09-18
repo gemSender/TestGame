@@ -13,5 +13,12 @@ namespace TaskTest.Game
         public float height;
         public float speed;
         public bool dead;
+        public bool Jump()
+        {
+            if (dead)
+                return false;
+            speed = 5f;
+            return true;
+        }
     }
 }

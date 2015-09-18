@@ -52,6 +52,41 @@ namespace TaskTest.Game
             this.rId = rId;
         }
 
+        public Player GetPlayer(int id)
+        {
+            return players.Find(x => x.id == id);
+        }
+
+        public bool Jump(int id)
+        {
+            int i = 0;
+            for (; i < players.Count; i++)
+            {
+                var item = players[i];
+                if (item.id == id) {
+                    if (item.dead)
+                        return false;
+                    item.Jump();
+                    break;
+                }
+            }
+            if (i < players.Count)
+            {
+                for (int j = 0; j < i; j++)
+                {
+                    var item = players[j];
+                    //BroamCast To Every Players
+                }
+
+                for (int j = i + 1; i < players.Count; j++)
+                {
+                    var item = players[j];
+                    //BroamCast To Every Players
+                }
+                return true;
+            }
+            return false;
+        }
         public float Start()
         {
             started = true;
