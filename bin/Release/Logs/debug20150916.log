@@ -1,0 +1,7 @@
+2015-09-16 21:34:53,151 [10] DEBUG DefaultBootstrap - The server instance IronAppServer has been created!
+2015-09-16 21:34:53,562 [10] DEBUG IronAppServer - The command ADD(D:\projects\TaskTest\TaskTest\bin\Release\Command\IronAppServer\ADD.py) has been discovered
+2015-09-16 21:34:53,574 [10] DEBUG DefaultBootstrap - The server instance IronAppServer has been initialized!
+2015-09-16 21:34:54,800 [10] DEBUG DefaultBootstrap - The PerformanceMonitor has been initialized!
+2015-09-16 21:34:54,800 [10] DEBUG DefaultBootstrap - The Bootstrap has been initialized!
+2015-09-16 21:34:54,819 [10] DEBUG IronAppServer - Listener (0.0.0.0:2012) was started
+2015-09-16 21:34:54,822 [10] DEBUG DefaultBootstrap - The PerformanceMonitor has been started!

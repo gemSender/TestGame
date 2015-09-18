@@ -1,0 +1,34 @@
+2015-09-17 10:52:46,116 [9] INFO  UdpServer - The server instance UdpServer has been started!
+2015-09-17 10:58:14,101 [9] INFO  UdpServer - The server instance UdpServer has been started!
+2015-09-17 10:58:27,893 [14] INFO  UdpServer - Session: 5344883c-8bac-4f8e-911b-1bd851b544f4/127.0.0.1:52060
+A new session connected!
+2015-09-17 11:00:43,241 [9] INFO  UdpServer - The server instance UdpServer has been started!
+2015-09-17 11:00:57,618 [14] INFO  UdpServer - Session: 5dfcd988-0ceb-49e4-9f60-e9660e3f72f3/127.0.0.1:59733
+A new session connected!
+2015-09-17 11:04:43,692 [8] INFO  UdpServer - The server instance UdpServer has been started!
+2015-09-17 11:04:49,183 [13] INFO  UdpServer - Session: 600c1a29-989e-4dd4-a906-f10a6ae944ce/127.0.0.1:57125
+A new session connected!
+2015-09-17 11:19:06,564 [9] INFO  UdpServer - The server instance UdpServer has been started!
+2015-09-17 11:19:17,135 [15] INFO  UdpServer - Session: eb15c7f0-f663-4804-b7a1-e509eb27dcb4/127.0.0.1:61871
+A new session connected!
+2015-09-17 14:04:59,965 [8] INFO  UdpServer - The server instance UdpServer has been started!
+2015-09-17 14:05:05,862 [15] INFO  UdpServer - Session: 89096d76-e490-4f3e-a99d-a3a02b8ee5c6/127.0.0.1:65113
+A new session connected!
+2015-09-17 16:15:22,031 [10] INFO  UdpServer - The server instance UdpServer has been started!
+2015-09-17 17:19:18,496 [9] INFO  UdpServer - The server instance UdpServer has been started!
+2015-09-17 17:22:40,708 [9] INFO  UdpServer - The server instance UdpServer has been stopped!
+2015-09-17 19:01:15,042 [10] INFO  UdpServer - The server instance UdpServer has been started!
+2015-09-17 19:01:18,642 [16] INFO  UdpServer - Session: 7fd02de2-d898-49af-a49d-fb0018dc63d3/127.0.0.1:56769
+A new session connected!
+2015-09-17 19:03:22,337 [20] INFO  UdpServer - Session: 54ee258a-b0c0-44ea-b37b-fff8a678feed/127.0.0.1:56770
+A new session connected!
+2015-09-17 19:04:11,281 [20] INFO  UdpServer - Session: 3cd070d3-2ec9-4d08-af96-69e18dfc8033/127.0.0.1:56771
+A new session connected!
+2015-09-17 19:13:10,208 [10] INFO  UdpServer - The server instance UdpServer has been started!
+2015-09-17 19:13:17,235 [17] INFO  UdpServer - Session: 9587730e-94c8-4aaf-bd89-50d6a93b3cf6/127.0.0.1:49274
+A new session connected!
+2015-09-17 19:14:29,549 [10] INFO  UdpServer - The server instance UdpServer has been started!
+2015-09-17 19:14:31,554 [15] INFO  UdpServer - Session: 2604582b-a5f4-47ad-b58f-d0adaed5ac71/127.0.0.1:49275
+A new session connected!
+2015-09-17 19:15:09,028 [16] INFO  UdpServer - Session: 27e63bce-5415-48b9-b31e-d749fbccca02/127.0.0.1:49276
+A new session connected!

@@ -1,0 +1,87 @@
+2015-09-17 10:52:44,493 [9] DEBUG DefaultBootstrap - The server instance UdpServer has been created!
+2015-09-17 10:52:44,540 [9] DEBUG UdpServer - The command CreateRoom(TaskTest.ServerFramework.CreateRoom, TaskTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null) has been discovered
+2015-09-17 10:52:44,556 [9] DEBUG DefaultBootstrap - The server instance UdpServer has been initialized!
+2015-09-17 10:52:46,085 [9] DEBUG DefaultBootstrap - The PerformanceMonitor has been initialized!
+2015-09-17 10:52:46,085 [9] DEBUG DefaultBootstrap - The Bootstrap has been initialized!
+2015-09-17 10:52:46,116 [9] DEBUG UdpServer - Listener (0.0.0.0:2012) was started
+2015-09-17 10:52:46,116 [9] DEBUG DefaultBootstrap - The PerformanceMonitor has been started!
+2015-09-17 10:58:12,806 [9] DEBUG DefaultBootstrap - The server instance UdpServer has been created!
+2015-09-17 10:58:12,853 [9] DEBUG UdpServer - The command CreateRoom(TaskTest.ServerFramework.CreateRoom, TaskTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null) has been discovered
+2015-09-17 10:58:12,868 [9] DEBUG DefaultBootstrap - The server instance UdpServer has been initialized!
+2015-09-17 10:58:14,085 [9] DEBUG DefaultBootstrap - The PerformanceMonitor has been initialized!
+2015-09-17 10:58:14,085 [9] DEBUG DefaultBootstrap - The Bootstrap has been initialized!
+2015-09-17 10:58:14,101 [9] DEBUG UdpServer - Listener (0.0.0.0:2012) was started
+2015-09-17 10:58:14,101 [9] DEBUG DefaultBootstrap - The PerformanceMonitor has been started!
+2015-09-17 11:00:41,603 [9] DEBUG DefaultBootstrap - The server instance UdpServer has been created!
+2015-09-17 11:00:41,993 [9] DEBUG UdpServer - The command CreateRoom(D:\projects\TaskTest\TaskTest\bin\Release\Command\UdpServer\CreateRoom.py) has been discovered
+2015-09-17 11:00:42,009 [9] DEBUG DefaultBootstrap - The server instance UdpServer has been initialized!
+2015-09-17 11:00:43,226 [9] DEBUG DefaultBootstrap - The PerformanceMonitor has been initialized!
+2015-09-17 11:00:43,226 [9] DEBUG DefaultBootstrap - The Bootstrap has been initialized!
+2015-09-17 11:00:43,241 [9] DEBUG UdpServer - Listener (0.0.0.0:2012) was started
+2015-09-17 11:00:43,241 [9] DEBUG DefaultBootstrap - The PerformanceMonitor has been started!
+2015-09-17 11:04:42,069 [8] DEBUG DefaultBootstrap - The server instance UdpServer has been created!
+2015-09-17 11:04:42,444 [8] DEBUG UdpServer - The command CreateRoom(D:\projects\TaskTest\TaskTest\bin\Release\Command\UdpServer\CreateRoom.py) has been discovered
+2015-09-17 11:04:42,459 [8] DEBUG DefaultBootstrap - The server instance UdpServer has been initialized!
+2015-09-17 11:04:43,676 [8] DEBUG DefaultBootstrap - The PerformanceMonitor has been initialized!
+2015-09-17 11:04:43,676 [8] DEBUG DefaultBootstrap - The Bootstrap has been initialized!
+2015-09-17 11:04:43,692 [8] DEBUG UdpServer - Listener (0.0.0.0:2012) was started
+2015-09-17 11:04:43,692 [8] DEBUG DefaultBootstrap - The PerformanceMonitor has been started!
+2015-09-17 11:19:04,783 [9] DEBUG DefaultBootstrap - The server instance UdpServer has been created!
+2015-09-17 11:19:05,235 [9] DEBUG UdpServer - The command CreateRoom(D:\projects\TaskTest\TaskTest\bin\Release\Command\UdpServer\CreateRoom.py) has been discovered
+2015-09-17 11:19:05,251 [9] DEBUG DefaultBootstrap - The server instance UdpServer has been initialized!
+2015-09-17 11:19:06,548 [9] DEBUG DefaultBootstrap - The PerformanceMonitor has been initialized!
+2015-09-17 11:19:06,548 [9] DEBUG DefaultBootstrap - The Bootstrap has been initialized!
+2015-09-17 11:19:06,564 [9] DEBUG UdpServer - Listener (0.0.0.0:2012) was started
+2015-09-17 11:19:06,564 [9] DEBUG DefaultBootstrap - The PerformanceMonitor has been started!
+2015-09-17 14:04:58,187 [8] DEBUG DefaultBootstrap - The server instance UdpServer has been created!
+2015-09-17 14:04:58,623 [8] DEBUG UdpServer - The command CreateRoom(D:\projects\TaskTest\TaskTest\bin\Release\Command\UdpServer\CreateRoom.py) has been discovered
+2015-09-17 14:04:58,623 [8] DEBUG DefaultBootstrap - The server instance UdpServer has been initialized!
+2015-09-17 14:04:59,949 [8] DEBUG DefaultBootstrap - The PerformanceMonitor has been initialized!
+2015-09-17 14:04:59,949 [8] DEBUG DefaultBootstrap - The Bootstrap has been initialized!
+2015-09-17 14:04:59,965 [8] DEBUG UdpServer - Listener (0.0.0.0:2012) was started
+2015-09-17 14:04:59,965 [8] DEBUG DefaultBootstrap - The PerformanceMonitor has been started!
+2015-09-17 16:14:25,489 [10] DEBUG DefaultBootstrap - The server instance UdpServer has been created!
+2015-09-17 16:14:25,878 [10] DEBUG UdpServer - The command CreateRoom(D:\projects\TaskTest\TaskTest\bin\Release\Command\UdpServer\CreateRoom.py) has been discovered
+2015-09-17 16:14:25,883 [10] DEBUG DefaultBootstrap - The server instance UdpServer has been initialized!
+2015-09-17 16:15:20,637 [10] DEBUG DefaultBootstrap - The server instance UdpServer has been created!
+2015-09-17 16:15:20,694 [10] DEBUG UdpServer - The command CreateRoom(TaskTest.ServerFramework.CreateRoom, TaskTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null) has been discovered
+2015-09-17 16:15:20,694 [10] DEBUG UdpServer - The command StartGame(TaskTest.ServerFramework.StartGame, TaskTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null) has been discovered
+2015-09-17 16:15:20,702 [10] DEBUG DefaultBootstrap - The server instance UdpServer has been initialized!
+2015-09-17 16:15:22,014 [10] DEBUG DefaultBootstrap - The PerformanceMonitor has been initialized!
+2015-09-17 16:15:22,014 [10] DEBUG DefaultBootstrap - The Bootstrap has been initialized!
+2015-09-17 16:15:22,031 [10] DEBUG UdpServer - Listener (0.0.0.0:2012) was started
+2015-09-17 16:15:22,034 [10] DEBUG DefaultBootstrap - The PerformanceMonitor has been started!
+2015-09-17 17:19:17,095 [9] DEBUG DefaultBootstrap - The server instance UdpServer has been created!
+2015-09-17 17:19:17,155 [9] DEBUG UdpServer - The command CreateRoom(TaskTest.ServerFramework.CreateRoom, TaskTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null) has been discovered
+2015-09-17 17:19:17,155 [9] DEBUG UdpServer - The command StartGame(TaskTest.ServerFramework.StartGame, TaskTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null) has been discovered
+2015-09-17 17:19:17,163 [9] DEBUG DefaultBootstrap - The server instance UdpServer has been initialized!
+2015-09-17 17:19:18,478 [9] DEBUG DefaultBootstrap - The PerformanceMonitor has been initialized!
+2015-09-17 17:19:18,478 [9] DEBUG DefaultBootstrap - The Bootstrap has been initialized!
+2015-09-17 17:19:18,496 [9] DEBUG UdpServer - Listener (0.0.0.0:2012) was started
+2015-09-17 17:19:18,499 [9] DEBUG DefaultBootstrap - The PerformanceMonitor has been started!
+2015-09-17 17:22:40,706 [9] DEBUG UdpServer - Listener (0.0.0.0:2012) was stoppped
+2015-09-17 17:22:40,708 [9] DEBUG DefaultBootstrap - The PerformanceMonitor has been stoppped!
+2015-09-17 19:01:13,608 [10] DEBUG DefaultBootstrap - The server instance UdpServer has been created!
+2015-09-17 19:01:13,678 [10] DEBUG UdpServer - The command CreateRoom(TaskTest.ServerFramework.CreateRoom, TaskTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null) has been discovered
+2015-09-17 19:01:13,678 [10] DEBUG UdpServer - The command StartGame(TaskTest.ServerFramework.StartGame, TaskTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null) has been discovered
+2015-09-17 19:01:13,688 [10] DEBUG DefaultBootstrap - The server instance UdpServer has been initialized!
+2015-09-17 19:01:15,022 [10] DEBUG DefaultBootstrap - The PerformanceMonitor has been initialized!
+2015-09-17 19:01:15,022 [10] DEBUG DefaultBootstrap - The Bootstrap has been initialized!
+2015-09-17 19:01:15,042 [10] DEBUG UdpServer - Listener (0.0.0.0:2012) was started
+2015-09-17 19:01:15,042 [10] DEBUG DefaultBootstrap - The PerformanceMonitor has been started!
+2015-09-17 19:13:08,818 [10] DEBUG DefaultBootstrap - The server instance UdpServer has been created!
+2015-09-17 19:13:08,878 [10] DEBUG UdpServer - The command CreateRoom(TaskTest.ServerFramework.CreateRoom, TaskTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null) has been discovered
+2015-09-17 19:13:08,878 [10] DEBUG UdpServer - The command StartGame(TaskTest.ServerFramework.StartGame, TaskTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null) has been discovered
+2015-09-17 19:13:08,888 [10] DEBUG DefaultBootstrap - The server instance UdpServer has been initialized!
+2015-09-17 19:13:10,178 [10] DEBUG DefaultBootstrap - The PerformanceMonitor has been initialized!
+2015-09-17 19:13:10,178 [10] DEBUG DefaultBootstrap - The Bootstrap has been initialized!
+2015-09-17 19:13:10,208 [10] DEBUG UdpServer - Listener (0.0.0.0:2012) was started
+2015-09-17 19:13:10,208 [10] DEBUG DefaultBootstrap - The PerformanceMonitor has been started!
+2015-09-17 19:14:28,249 [10] DEBUG DefaultBootstrap - The server instance UdpServer has been created!
+2015-09-17 19:14:28,319 [10] DEBUG UdpServer - The command CreateRoom(TaskTest.ServerFramework.CreateRoom, TaskTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null) has been discovered
+2015-09-17 19:14:28,319 [10] DEBUG UdpServer - The command StartGame(TaskTest.ServerFramework.StartGame, TaskTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null) has been discovered
+2015-09-17 19:14:28,329 [10] DEBUG DefaultBootstrap - The server instance UdpServer has been initialized!
+2015-09-17 19:14:29,529 [10] DEBUG DefaultBootstrap - The PerformanceMonitor has been initialized!
+2015-09-17 19:14:29,529 [10] DEBUG DefaultBootstrap - The Bootstrap has been initialized!
+2015-09-17 19:14:29,539 [10] DEBUG UdpServer - Listener (0.0.0.0:2012) was started
+2015-09-17 19:14:29,549 [10] DEBUG DefaultBootstrap - The PerformanceMonitor has been started!

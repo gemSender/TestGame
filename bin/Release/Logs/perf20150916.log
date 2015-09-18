@@ -1,0 +1,28 @@
+2015-09-16 21:34:54,844 Performance - ---------------------------------------------------
+CPU Usage: 0.00%, Physical Memory Usage: 47,878,144.00, Total Thread Count: 21
+AvailableWorkingThreads: 1022, AvailableCompletionPortThreads: 1000
+MaxWorkingThreads: 1023, MaxCompletionPortThreads: 1000
+IronAppServer ----------------------------------
+Started Time: 2015/9/16 21:34:54
+Is Running: True
+Total Connections: 0
+Maximum Allowed Connection Number: 50
+Total Handled Requests: 0
+Request Handling Speed (#/second): 0
+Avialable Sending Queue Items: 256
+Total Sending Queue Items: 256
+
+2015-09-16 21:35:54,842 Performance - ---------------------------------------------------
+CPU Usage: 0.08%, Physical Memory Usage: 50,479,104.00, Total Thread Count: 25
+AvailableWorkingThreads: 1022, AvailableCompletionPortThreads: 1000
+MaxWorkingThreads: 1023, MaxCompletionPortThreads: 1000
+IronAppServer ----------------------------------
+Started Time: 2015/9/16 21:34:54
+Is Running: True
+Total Connections: 1
+Maximum Allowed Connection Number: 50
+Total Handled Requests: 2
+Request Handling Speed (#/second): 0
+Avialable Sending Queue Items: 255
+Total Sending Queue Items: 256
+
