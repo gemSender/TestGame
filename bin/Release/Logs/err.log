@@ -1,5 +1,0 @@
-2015-09-17 10:52:00,224 [10] ERROR DefaultBootstrap - System.Exception: Failed to find a service for server UdpServer!
-   дк SuperSocket.SocketEngine.WorkItemFactoryInfoLoader.LoadResult(Func`2 serverConfigResolver)
-   дк SuperSocket.SocketEngine.DefaultBootstrap.Initialize(Func`2 serverConfigResolver, ILogFactory logFactory)
-2015-09-17 16:14:25,883 [10] ERROR UdpServer - Duplicated name command has been found! Command name: CreateRoom
-2015-09-17 16:14:25,883 [10] ERROR DefaultBootstrap - Failed to setup server instance!
