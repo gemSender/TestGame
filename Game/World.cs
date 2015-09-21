@@ -54,9 +54,8 @@ namespace TaskTest.Game
         List<Room> rooms = new List<Room>();
         public Room CreateRoom(int pId)
         {
-            var newRoom = new Room(NextId);
+            var newRoom = new Room(NextId, pId);
             rooms.Add(newRoom);
-            newRoom.AddPlayer(pId);
             Console.WriteLine("Room {0} Created", newRoom.rId);
             return newRoom;
         }
@@ -102,14 +101,6 @@ namespace TaskTest.Game
             }
         }
 
-        public void AddPlayer(int rId, int uId)
-        {
-            var item = rooms.Find(x => x.rId == rId);
-            if (item != null)
-            {
-                item.AddPlayer(uId);
-            }
-        }
 
 
         public Room GetRoom(int rId)

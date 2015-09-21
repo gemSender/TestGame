@@ -15,12 +15,22 @@ namespace TaskTest.Game
         public int frame;
         bool started = false;
         List<Player> players = new List<Player>();
-        public void AddPlayer(int id)
+        void AddPlayer(int id)
         {
             players.Add(new Player() { id = id, height = 50 });
             Console.WriteLine("Room {0}: Player {1} enter room at frame {2}", rId, id, frame);
         }
 
+        public Common.EnterRoomReply EnterRoom(int id)
+        {
+            var ret = new Common.EnterRoomReply { ids = new int[8], count = players.Count};
+            for (int i = 0; i < ret.count; i++)
+            {
+                ret.ids[i] = players[i].id;
+            }
+            AddPlayer(id);
+            return ret;
+        }
         public void Update(float time)
         {
             while (started && time - lastUpdateTime > deltaTime)
@@ -47,9 +57,10 @@ namespace TaskTest.Game
             }
         }
 
-        public Room(int rId)
+        public Room(int rId, int creatorId)
         {
             this.rId = rId;
+            AddPlayer(creatorId);
         }
 
         public Player GetPlayer(int id)

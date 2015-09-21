@@ -11,13 +11,9 @@
         public int capacity;
     }
 
-    public struct StartGame
+    public struct RoomRpcNoArg
     {
         public RoomPlayerHead head;
     }
 
-    public struct Jump
-    {
-        public RoomPlayerHead head;
-    }
 }
