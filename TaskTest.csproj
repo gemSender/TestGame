@@ -75,22 +75,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="3rd_party\FlatBuffer\ByteBuffer.cs" />
+    <Compile Include="3rd_party\FlatBuffer\FlatBufferBuilder.cs" />
+    <Compile Include="3rd_party\FlatBuffer\FlatBufferConstants.cs" />
+    <Compile Include="3rd_party\FlatBuffer\Offset.cs" />
+    <Compile Include="3rd_party\FlatBuffer\Struct.cs" />
+    <Compile Include="3rd_party\FlatBuffer\Table.cs" />
     <Compile Include="Game\CommandReply.cs" />
     <Compile Include="Game\GameCommand.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\Room.cs" />
     <Compile Include="Game\Utility.cs" />
     <Compile Include="Game\World.cs" />
-    <Compile Include="IO\MessageReceiver.cs" />
+    <Compile Include="Messages\CreateObj.cs" />
+    <Compile Include="Messages\Empty.cs" />
+    <Compile Include="Messages\GenMessage.cs" />
+    <Compile Include="Messages\MessageType.cs" />
+    <Compile Include="Messages\Quat.cs" />
+    <Compile Include="Messages\RpcMsg.cs" />
+    <Compile Include="Messages\Vec3.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServerFramework\Command\GameCommand.cs" />
+    <Compile Include="ServerFramework\Room\Command\GameCommand.cs" />
+    <Compile Include="ServerFramework\Room\Command\World\Commands.cs" />
     <Compile Include="ServerFramework\Common\MessageType.cs" />
-    <Compile Include="ServerFramework\GameReceiverFilter.cs" />
-    <Compile Include="ServerFramework\GameServer.cs" />
-    <Compile Include="ServerFramework\GameSession.cs" />
+    <Compile Include="ServerFramework\Room\GameReceiverFilter.cs" />
+    <Compile Include="ServerFramework\Room\GameServer.cs" />
+    <Compile Include="ServerFramework\Room\GameSession.cs" />
     <Compile Include="ServerFramework\Common\UserCommandType.cs" />
-    <Compile Include="ServerFramework\UserUdpRequest.cs" />
+    <Compile Include="ServerFramework\Room\UserUdpRequest.cs" />
+    <Compile Include="ServerFramework\World\WorldServer.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +121,7 @@
   <ItemGroup>
     <Folder Include="3rd_party\SuperSocket\" />
     <Folder Include="Command\UdpServer\" />
+    <Folder Include="IO\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,9 +8,8 @@ namespace GameCommand
 {
     public enum UserCommandType
     {
-        GetSession = 0,
         CreateRoom = 1,
-        StartGame = 2,
-        Jump = 3
+        Rpc = 2,
+        CreateObj = 3
     }
 }

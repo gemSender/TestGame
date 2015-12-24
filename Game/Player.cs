@@ -8,17 +8,8 @@ namespace TaskTest.Game
 {
     public class Player
     {
-        public int id;
+        public int nextMsgId;
+        public string id;
         public GameSession session;
-        public float height;
-        public float speed;
-        public bool dead;
-        public bool Jump()
-        {
-            if (dead)
-                return false;
-            speed = 5f;
-            return true;
-        }
     }
 }

@@ -10,6 +10,7 @@ namespace TaskTest.Game
 {
     public class World
     {
+        Dictionary<string, Room> playerRoomDict = new Dictionary<string, Room>();
         static World mInstance;
         public Action onDestroy;
         Queue<Tuple<Func<object>, Action<GameSession, object>, GameSession>> actions = new Queue<Tuple<Func<object>,Action<GameSession, object>, GameSession>>();
@@ -25,101 +26,21 @@ namespace TaskTest.Game
             }
         }
 
-        public static readonly float sleepTime = 1 / 120f;
-        public float time
-        {
-            get
-            {
-                return sw.ElapsedMilliseconds / 1000f;
-            }
-        }
-        int _nextId = 0;
-        Stopwatch sw;
-        bool destroyed;
-
-        public bool IsDestroyed
-        {
-            get
-            {
-                return destroyed;
-            }
-        }
-        public int NextId
-        {
-            get
-            {
-                return _nextId++;
-            }
-        }
-        List<Room> rooms = new List<Room>();
-        public Room CreateRoom(int pId)
-        {
-            var newRoom = new Room(NextId, pId);
-            rooms.Add(newRoom);
-            Console.WriteLine("Room {0} Created", newRoom.rId);
-            return newRoom;
-        }
-
         public void MainLoop()
+        { 
+        }
+
+        public void CreateRoom(GameSession session)
         {
-            while (!destroyed)
+            playerRoomDict[session.SessionID] = Room.Create(session);
+        }
+
+        public void ProcessCommand(GameSession session, Messages.GenMessage msg)
+        { 
+            Room room;
+            if(playerRoomDict.TryGetValue(session.SessionID, out room))
             {
-                lock (actions)
-                {
-                    while (actions.Count > 0)
-                    {
-                        var action = actions.Dequeue();
-                        var ret = action.Item1();
-                        if (action.Item2 != null)
-                        {
-                            action.Item2(action.Item3, ret);
-                        }
-                    }
-                }
-                for (int i = 0; i < rooms.Count; i++)
-                {
-                    var room = rooms[i];
-                    if (time - room.lastUpdateTime > Room.deltaTime)
-                    {
-                        room.Update(time);
-                    }
-                }
-            }
-            Console.WriteLine("World has been destoryed");
-        }
-        private World()
-        {
-            sw = new Stopwatch();
-            sw.Start();
-        }
-
-        public void Destroy()
-        {
-            destroyed = true;
-            if (onDestroy != null) {
-                onDestroy();
-            }
-        }
-
-
-
-        public Room GetRoom(int rId)
-        {
-            return rooms.Find(x => x.rId == rId);
-        }
-
-        public void InvokeAction<RetType>(Func<RetType> action, Action<GameSession, RetType> callBack = null, GameSession session = null)
-        {
-            lock (actions)
-            {
-                Func<object> finalAction = () => action();
-                if (callBack != null)
-                {
-                    actions.Enqueue(new Tuple<Func<object>, Action<GameSession, object>, GameSession>(finalAction, (sess, o) => callBack(sess, (RetType)o), session));
-                }
-                else {
-                    actions.Enqueue(new Tuple<Func<object>, System.Action<GameSession, object>, GameSession>(finalAction, null, session));
-                }
+                room.GetMessage(msg);
             }
         }
     }
