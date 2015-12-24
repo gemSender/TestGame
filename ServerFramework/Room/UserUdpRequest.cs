@@ -23,7 +23,7 @@ namespace TaskTest.ServerFramework
 
         public static UserUdpRequest Decode(byte[] src, int offset, int length)
         {
-            ByteBuffer bb = new ByteBuffer(src, 0);
+            ByteBuffer bb = new ByteBuffer(src, offset);
             Messages.GenMessage msg = Messages.GenMessage.GetRootAsGenMessage(bb);
             return new UserUdpRequest("GenMessage", msg.PId) { msg = msg};
         }

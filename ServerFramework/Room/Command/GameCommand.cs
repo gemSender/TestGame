@@ -16,6 +16,7 @@ namespace TaskTest.ServerFramework
         public override void ExecuteCommand(GameSession session, UserUdpRequest requestInfo)
         {
             var msg = requestInfo.msg;
+            World.Instance.ProcessCommand(session, msg);
         }
     }
 

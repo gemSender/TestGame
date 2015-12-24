@@ -87,24 +87,29 @@
     <Compile Include="Game\Room.cs" />
     <Compile Include="Game\Utility.cs" />
     <Compile Include="Game\World.cs" />
-    <Compile Include="Messages\CreateObj.cs" />
-    <Compile Include="Messages\Empty.cs" />
-    <Compile Include="Messages\GenMessage.cs" />
-    <Compile Include="Messages\MessageType.cs" />
-    <Compile Include="Messages\Quat.cs" />
-    <Compile Include="Messages\RpcMsg.cs" />
-    <Compile Include="Messages\Vec3.cs" />
+    <Compile Include="Messages\Room\CreateObj.cs" />
+    <Compile Include="Messages\Room\Empty.cs" />
+    <Compile Include="Messages\Room\GenMessage.cs" />
+    <Compile Include="Messages\Room\MessageType.cs" />
+    <Compile Include="Messages\Room\Quat.cs" />
+    <Compile Include="Messages\Room\RpcMsg.cs" />
+    <Compile Include="Messages\Room\Vec3.cs" />
+    <Compile Include="Messages\World\MessageType.cs" />
+    <Compile Include="Messages\World\WorldMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerFramework\Room\Command\GameCommand.cs" />
-    <Compile Include="ServerFramework\Room\Command\World\Commands.cs" />
     <Compile Include="ServerFramework\Common\MessageType.cs" />
+    <Compile Include="ServerFramework\World\Command\WorldCommands.cs" />
     <Compile Include="ServerFramework\Room\GameReceiverFilter.cs" />
     <Compile Include="ServerFramework\Room\GameServer.cs" />
     <Compile Include="ServerFramework\Room\GameSession.cs" />
     <Compile Include="ServerFramework\Common\UserCommandType.cs" />
     <Compile Include="ServerFramework\Room\UserUdpRequest.cs" />
+    <Compile Include="ServerFramework\World\WorldReceiverFilter.cs" />
+    <Compile Include="ServerFramework\World\WorldRequest.cs" />
     <Compile Include="ServerFramework\World\WorldServer.cs" />
+    <Compile Include="ServerFramework\World\WorldSession.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +127,7 @@
     <Folder Include="3rd_party\SuperSocket\" />
     <Folder Include="Command\UdpServer\" />
     <Folder Include="IO\" />
+    <Folder Include="ServerFramework\Room\Command\World\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

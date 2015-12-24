@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Common;
 using FlatBuffers;
 using TaskTest.Game;
+using SuperSocket.SocketBase;
 
 namespace TaskTest.ServerFramework
 {
-    public class GameSession : SuperSocket.SocketBase.AppSession<GameSession, UserUdpRequest>
+    public class GameSession : AppSession<GameSession, UserUdpRequest>
     {
         public bool Send(ByteBuffer bb)
         {

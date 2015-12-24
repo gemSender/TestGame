@@ -10,6 +10,7 @@ namespace TaskTest.Game
 {
     public class World
     {
+        List<Room> rooms = new List<Room>();
         Dictionary<string, Room> playerRoomDict = new Dictionary<string, Room>();
         static World mInstance;
         public Action onDestroy;
@@ -30,9 +31,17 @@ namespace TaskTest.Game
         { 
         }
 
-        public void CreateRoom(GameSession session)
+        public void CreateRoom(WorldSession session)
         {
-            playerRoomDict[session.SessionID] = Room.Create(session);
+            rooms.Add(playerRoomDict[session.SessionID] = Room.Create(session.SessionID));
+        }
+
+        public void EnterRoom(WorldSession session, string id)
+        {
+            Room room = rooms.Find(x => x.Id == id);
+            if (room != null) {
+                room.AddPlayer(session.SessionID);
+            }
         }
 
         public void ProcessCommand(GameSession session, Messages.GenMessage msg)
@@ -40,7 +49,7 @@ namespace TaskTest.Game
             Room room;
             if(playerRoomDict.TryGetValue(session.SessionID, out room))
             {
-                room.GetMessage(msg);
+                room.GetMessage(session, msg);
             }
         }
     }

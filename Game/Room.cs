@@ -10,16 +10,23 @@ namespace TaskTest.Game
 {
     public class Room
     {
+        public string Id
+        {
+            get;
+            private set;
+        }
         List<Player> players = new List<Player>();
-        private Room() { }
+        private Room() {
+            Id = new Guid().ToString();
+        }
 
-        public static Room Create(GameSession session) {
+        public static Room Create(string playerId) {
             var room = new Room();
-            room.players.Add(new Player() { nextMsgId = 1, session = session, id = session.SessionID});
+            room.players.Add(new Player() { nextMsgId = 1, id = playerId });
             return room;
         }
 
-        public void GetMessage(Messages.GenMessage msg)
+        public void GetMessage(GameSession session, Messages.GenMessage msg)
         {
             var player = players.Find(x => x.id == msg.PId);
             int msgId = msg.MsgId;
@@ -28,8 +35,14 @@ namespace TaskTest.Game
                 player.nextMsgId = msgId;
             }
             for (int i = 0, iMax = players.Count; i < iMax; i++) {
-                player.session.Send(msg.ByteBuffer);
+                session.Send(msg.ByteBuffer);
             }
+        }
+
+        public bool AddPlayer(string playerId)
+        {
+            players.Add(new Player() { nextMsgId = 1, id = playerId});
+            return true;
         }
     }
 }
