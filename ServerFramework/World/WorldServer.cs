@@ -10,6 +10,10 @@ namespace TaskTest.ServerFramework
 {
     public class WorldServer : AppServer<WorldSession, WorldRequest>
     {
+        public WorldServer()
+            : base(new DefaultReceiveFilterFactory<WorldReceiverFilter, WorldRequest>())
+        {
 
+        }
     }
 }

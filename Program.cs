@@ -101,9 +101,6 @@ namespace TaskTest
         }
         static void Main(string[] args) 
         {
-            World world = World.Instance;
-            Task gameTask = new Task(world.MainLoop);
-            gameTask.Start();
             StartWithConfig();
         }
 
