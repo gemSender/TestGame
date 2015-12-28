@@ -11,7 +11,7 @@ using TaskTest.Game;
 namespace TaskTest.ServerFramework
 {
 
-    public class GenMessage : CommandBase<GameSession, UserUdpRequest> 
+    public class RoomMessage : CommandBase<GameSession, UserUdpRequest> 
     {
         public override void ExecuteCommand(GameSession session, UserUdpRequest requestInfo)
         {
@@ -20,4 +20,18 @@ namespace TaskTest.ServerFramework
         }
     }
 
+    public class Rpc : RoomMessage{ }
+
+    public class CreateObj : RoomMessage{}
+
+    public class AddPlayer : RoomMessage
+    {
+        public override void ExecuteCommand(GameSession session, UserUdpRequest requestInfo)
+        {
+            World.Instance.EnterRoom(session, requestInfo.SessionID);
+        }
+    }
+
+    public class Empty : RoomMessage { }
 }
+

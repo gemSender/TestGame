@@ -17,15 +17,4 @@ namespace TaskTest.ServerFramework
             World.Instance.CreateRoom(session);
         }
     }
-
-    public class EnterRoom : CommandBase<WorldSession, WorldRequest>
-    {
-        public override void ExecuteCommand(WorldSession session, WorldRequest requestInfo)
-        {
-            var msg = requestInfo.msg;
-            var buf = msg.GetBuffBytes().Value.Array;
-            string roomId = System.Text.Encoding.UTF8.GetString(buf);
-            World.Instance.EnterRoom(session, roomId);
-        }
-    }
 }

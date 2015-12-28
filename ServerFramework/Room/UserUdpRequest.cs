@@ -25,7 +25,7 @@ namespace TaskTest.ServerFramework
         {
             ByteBuffer bb = new ByteBuffer(src, offset);
             Messages.GenMessage msg = Messages.GenMessage.GetRootAsGenMessage(bb);
-            return new UserUdpRequest("GenMessage", msg.PId) { msg = msg};
+            return new UserUdpRequest("RoomMessage", msg.PId) { msg = msg};
         }
         
         

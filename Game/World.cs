@@ -14,7 +14,6 @@ namespace TaskTest.Game
         Dictionary<string, Room> playerRoomDict = new Dictionary<string, Room>();
         static World mInstance;
         public Action onDestroy;
-        Queue<Tuple<Func<object>, Action<GameSession, object>, GameSession>> actions = new Queue<Tuple<Func<object>,Action<GameSession, object>, GameSession>>();
         public static World Instance
         {
             get
@@ -36,11 +35,11 @@ namespace TaskTest.Game
             rooms.Add(playerRoomDict[session.SessionID] = Room.Create(session.SessionID));
         }
 
-        public void EnterRoom(WorldSession session, string id)
+        public void EnterRoom(GameSession session, string id)
         {
             Room room = rooms.Find(x => x.Id == id);
             if (room != null) {
-                room.AddPlayer(session.SessionID);
+                room.AddPlayer(session, session.SessionID);
             }
         }
 
