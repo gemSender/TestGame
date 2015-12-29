@@ -57,5 +57,13 @@ namespace TaskTest.Game
             }
             return true;
         }
+
+        public int PlayerCount
+        {
+            get
+            {
+                return players.Count;
+            }
+        }
     }
 }

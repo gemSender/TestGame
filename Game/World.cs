@@ -26,6 +26,10 @@ namespace TaskTest.Game
             }
         }
 
+        public List<Room> GetRoomList()
+        {
+            return rooms;
+        }
         public void MainLoop()
         { 
         }

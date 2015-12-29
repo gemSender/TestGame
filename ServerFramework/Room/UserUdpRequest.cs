@@ -17,7 +17,7 @@ namespace TaskTest.ServerFramework
             get;
             private set;
         }
-        public UserUdpRequest(string key, string sessionID) :base(key, sessionID){
+        public UserUdpRequest(MessageType msgType, string sessionID) :base(msgType.ToString(), sessionID){
             
         }
 
@@ -25,7 +25,7 @@ namespace TaskTest.ServerFramework
         {
             ByteBuffer bb = new ByteBuffer(src, offset);
             Messages.GenMessage msg = Messages.GenMessage.GetRootAsGenMessage(bb);
-            return new UserUdpRequest("RoomMessage", msg.PId) { msg = msg};
+            return new UserUdpRequest(msg.MsgType, msg.PId) { msg = msg};
         }
         
         

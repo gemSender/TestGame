@@ -76,5 +76,14 @@ namespace TaskTest
             Buffer.BlockCopy(bytes, 0, buffer, startIndex, bytes.Length);
             return bytes.Length;
         }
+        public static byte[] GetDataBuffer(int len, Func<int, byte> getMethod, int startIndex = 0)
+        {
+            byte[] ret = new byte[len];
+            for (int i = startIndex; i < len + startIndex; i++)
+            {
+                ret[i - startIndex] = getMethod(i);
+            }
+            return ret;
+        }
     }
 }
