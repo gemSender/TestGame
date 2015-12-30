@@ -16,6 +16,7 @@ namespace TaskTest.ServerFramework
         public override void ExecuteCommand(GameSession session, UserUdpRequest requestInfo)
         {
             var msg = requestInfo.msg;
+            Console.WriteLine("MsgType: {0}, Frame: {1}", msg.MsgType, msg.Frame);
             World.Instance.ProcessCommand(session, msg);
         }
     }
@@ -28,7 +29,11 @@ namespace TaskTest.ServerFramework
     {
         public override void ExecuteCommand(GameSession session, UserUdpRequest requestInfo)
         {
-            World.Instance.EnterRoom(session, requestInfo.SessionID);
+            Console.WriteLine("EnterRoom");
+            var msg = requestInfo.msg;
+            var arrSeg = msg.GetBufBytes().Value;
+            var roomId = System.Text.Encoding.UTF8.GetString(arrSeg.Array, arrSeg.Offset, arrSeg.Count);
+            World.Instance.EnterRoom(session, roomId);
         }
     }
 

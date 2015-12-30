@@ -8,6 +8,8 @@ using SuperSocket.SocketBase.Protocol;
 using SuperSocket.SocketBase;
 using TaskTest.Game;
 using WorldMessages;
+using TaskTest.Utility;
+using FlatBuffers;
 namespace TaskTest.ServerFramework
 {
     public class CreateRoom : CommandBase<WorldSession, WorldRequest>
@@ -15,7 +17,11 @@ namespace TaskTest.ServerFramework
         public override void ExecuteCommand(WorldSession session, WorldRequest requestInfo)
         {
             var msg = requestInfo.msg;
-            World.Instance.CreateRoom(session);
+            var room = World.Instance.CreateRoom(session);
+            FlatBufferBuilder fb = new FlatBufferBuilder(1);
+            var vec = CreateRoomReply.CreateCreateRoomReply(fb, 0, fb.CreateString(room.Id));
+            fb.Finish(vec.Value);
+            session.Reply(MessageType.CreateRoomReply, msg.MsgId, fb.DataBuffer.GetArraySegment());
         }
     }
 
@@ -24,7 +30,7 @@ namespace TaskTest.ServerFramework
         public override void ExecuteCommand(WorldSession session, WorldRequest requestInfo)
         {
             var msg = requestInfo.msg;
-            Console.Write("GetRoomList, Id: {0}", msg.MsgId);
+            Console.WriteLine("GetRoomList, Id: {0}", msg.MsgId);
             var rooms = World.Instance.GetRoomList();
             int len = rooms.Count;
             FlatBuffers.FlatBufferBuilder builder = new FlatBuffers.FlatBufferBuilder(1);
@@ -37,17 +43,7 @@ namespace TaskTest.ServerFramework
             }
             var roomListVec = GetRoomListReply.CreateGetRoomListReply(builder, GetRoomListReply.CreateRoomVector(builder, roomOffs));
             builder.Finish(roomListVec.Value);
-            //Console.WriteLine("RoomLength: " + GetRoomListReply.GetRootAsGetRoomListReply(new FlatBuffers.ByteBuffer(Utility.GetDataBuffer(builder.DataBuffer.Length - builder.DataBuffer.Position, builder.DataBuffer.Get, builder.DataBuffer.Position), 0)).RoomLength);
-
-            FlatBuffers.FlatBufferBuilder wBuilder = new FlatBuffers.FlatBufferBuilder(1);
-            var worldVec = ReplyMsg.CreateReplyMsg(
-                wBuilder, 
-                MessageType.GetRoomListReply, 
-                msg.MsgId,
-                ReplyMsg.CreateBuffVector(wBuilder, Utility.GetDataBuffer(builder.DataBuffer.Length - builder.DataBuffer.Position, builder.DataBuffer.Get, builder.DataBuffer.Position))
-                );
-            wBuilder.Finish(worldVec.Value);
-            session.Send(wBuilder.DataBuffer.Data, wBuilder.DataBuffer.Position, wBuilder.DataBuffer.Length - wBuilder.DataBuffer.Position);
+            session.Reply(MessageType.GetRoomListReply, msg.MsgId, builder.DataBuffer.GetArraySegment());
         }
     }
 }

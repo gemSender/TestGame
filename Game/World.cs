@@ -34,9 +34,11 @@ namespace TaskTest.Game
         { 
         }
 
-        public void CreateRoom(WorldSession session)
+        public Room CreateRoom(WorldSession session)
         {
-            rooms.Add(playerRoomDict[session.SessionID] = Room.Create(session.SessionID));
+            Room ret = Room.Create(session.SessionID);
+            rooms.Add(playerRoomDict[session.SessionID] = ret);
+            return ret;
         }
 
         public void EnterRoom(GameSession session, string id)

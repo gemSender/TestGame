@@ -85,7 +85,6 @@
     <Compile Include="Game\GameCommand.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\Room.cs" />
-    <Compile Include="Game\Utility.cs" />
     <Compile Include="Game\World.cs" />
     <Compile Include="Messages\Room\CreateObj.cs" />
     <Compile Include="Messages\Room\Empty.cs" />
@@ -114,7 +113,8 @@
     <Compile Include="ServerFramework\World\WorldRequest.cs" />
     <Compile Include="ServerFramework\World\WorldServer.cs" />
     <Compile Include="ServerFramework\World\WorldSession.cs" />
-    <Compile Include="Utility.cs" />
+    <Compile Include="Utility\Extersions.cs" />
+    <Compile Include="Utility\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -131,7 +131,6 @@
     <Folder Include="3rd_party\SuperSocket\" />
     <Folder Include="Command\UdpServer\" />
     <Folder Include="IO\" />
-    <Folder Include="ServerFramework\Room\Command\World\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

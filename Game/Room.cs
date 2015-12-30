@@ -19,7 +19,7 @@ namespace TaskTest.Game
         
         List<Player> players = new List<Player>();
         private Room() {
-            Id = new Guid().ToString();
+            Id = Guid.NewGuid().ToString("N");
         }
 
         public static Room Create(string playerId) {
@@ -47,7 +47,14 @@ namespace TaskTest.Game
 
         public bool AddPlayer(GameSession session, string playerId)
         {
-            players.Add(new Player() { nextMsgId = 1, id = playerId, session = session});
+            var playerItem = players.Find(x => x.id == playerId);
+            if (playerItem == null)
+            {
+                players.Add(new Player() { nextMsgId = 1, id = playerId, session = session });
+            }
+            else {
+                playerItem.session = session;
+            }
             FlatBufferBuilder builder = new FlatBufferBuilder(1);
             var vec = GenMessage.CreateGenMessage(builder, MessageType.AddPlayer, builder.CreateString(playerId), 0, Messages.GenMessage.CreateBufVector(builder, new byte[0]), maxFrame + 2);
             builder.Finish(vec.Value);
