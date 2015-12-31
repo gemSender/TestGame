@@ -34,19 +34,23 @@ namespace TaskTest.Game
         { 
         }
 
-        public Room CreateRoom(WorldSession session)
+        public Room CreateRoom(WorldSession session, int capacity)
         {
-            Room ret = Room.Create(session.SessionID);
+            Room ret = Room.Create(session.SessionID, capacity);
             rooms.Add(playerRoomDict[session.SessionID] = ret);
             return ret;
         }
 
-        public void EnterRoom(GameSession session, string id)
+        public bool EnterRoom(GameSession session, string id)
         {
             Room room = rooms.Find(x => x.Id == id);
             if (room != null) {
-                room.AddPlayer(session, session.SessionID);
+                lock (room)
+                {
+                    return room.AddPlayer(session, session.SessionID);
+                }
             }
+            return false;
         }
 
         public void ProcessCommand(GameSession session, Messages.GenMessage msg)
@@ -54,7 +58,10 @@ namespace TaskTest.Game
             Room room;
             if(playerRoomDict.TryGetValue(session.SessionID, out room))
             {
-                room.GetMessage(session, msg);
+                lock (room)
+                {
+                    room.GetMessage(session, msg);
+                }
             }
         }
     }

@@ -7,6 +7,7 @@ using SuperSocket.SocketBase.Command;
 using SuperSocket.SocketBase.Protocol;
 using SuperSocket.SocketBase;
 using TaskTest.Game;
+using System.Threading;
 
 namespace TaskTest.ServerFramework
 {
@@ -16,7 +17,7 @@ namespace TaskTest.ServerFramework
         public override void ExecuteCommand(GameSession session, UserUdpRequest requestInfo)
         {
             var msg = requestInfo.msg;
-            Console.WriteLine("MsgType: {0}, Frame: {1}", msg.MsgType, msg.Frame);
+            //Console.WriteLine("MsgType: {0}, Frame: {1}, CurrentThread: {2}", msg.MsgType, msg.Frame, Thread.CurrentThread.ManagedThreadId);
             World.Instance.ProcessCommand(session, msg);
         }
     }

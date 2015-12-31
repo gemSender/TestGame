@@ -17,9 +17,11 @@ namespace TaskTest.ServerFramework
         public override void ExecuteCommand(WorldSession session, WorldRequest requestInfo)
         {
             var msg = requestInfo.msg;
-            var room = World.Instance.CreateRoom(session);
+            var seg = msg.GetBuffBytes().Value;
+            int capacity = BitConverter.ToInt32(seg.Array, seg.Offset);
+            var room = World.Instance.CreateRoom(session, capacity);
             FlatBufferBuilder fb = new FlatBufferBuilder(1);
-            var vec = CreateRoomReply.CreateCreateRoomReply(fb, 0, fb.CreateString(room.Id));
+            var vec = CreateRoomReply.CreateCreateRoomReply(fb, 0, fb.CreateString(room.Id), capacity);
             fb.Finish(vec.Value);
             session.Reply(MessageType.CreateRoomReply, msg.MsgId, fb.DataBuffer.GetArraySegment());
         }
@@ -30,7 +32,6 @@ namespace TaskTest.ServerFramework
         public override void ExecuteCommand(WorldSession session, WorldRequest requestInfo)
         {
             var msg = requestInfo.msg;
-            Console.WriteLine("GetRoomList, Id: {0}", msg.MsgId);
             var rooms = World.Instance.GetRoomList();
             int len = rooms.Count;
             FlatBuffers.FlatBufferBuilder builder = new FlatBuffers.FlatBufferBuilder(1);
@@ -38,7 +39,7 @@ namespace TaskTest.ServerFramework
             for (int i = 0; i < len; i++)
             {
                 var item = rooms[i];
-                var vec = WorldMessages.Room.CreateRoom(builder, builder.CreateString(item.Id), item.PlayerCount);
+                var vec = WorldMessages.Room.CreateRoom(builder, builder.CreateString(item.Id), item.PlayerCount, item.Capacity);
                 roomOffs[i] = vec;
             }
             var roomListVec = GetRoomListReply.CreateGetRoomListReply(builder, GetRoomListReply.CreateRoomVector(builder, roomOffs));
