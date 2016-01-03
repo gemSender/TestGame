@@ -50,7 +50,6 @@ namespace TaskTest.Game
             }
             for (int i = 0, iMax = players.Count; i < iMax; i++) {
                 players[i].session.Send(msg.ByteBuffer);
-                Console.WriteLine("{0}: Send Frame {1} To {2}", pId, frame, players[i].id);
             }
         }
 

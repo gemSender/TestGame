@@ -37,7 +37,7 @@ namespace TaskTest.Game
         public Room CreateRoom(WorldSession session, int capacity)
         {
             Room ret = Room.Create(session.SessionID, capacity);
-            rooms.Add(playerRoomDict[session.SessionID] = ret);
+            rooms.Add(ret);
             return ret;
         }
 
@@ -45,6 +45,7 @@ namespace TaskTest.Game
         {
             Room room = rooms.Find(x => x.Id == id);
             if (room != null) {
+                playerRoomDict[session.SessionID] = room;
                 lock (room)
                 {
                     return room.AddPlayer(session, session.SessionID);
@@ -56,7 +57,7 @@ namespace TaskTest.Game
         public void ProcessCommand(GameSession session, Messages.GenMessage msg)
         { 
             Room room;
-            if(playerRoomDict.TryGetValue(session.SessionID, out room))
+            if (playerRoomDict.TryGetValue(session.SessionID, out room))
             {
                 lock (room)
                 {
