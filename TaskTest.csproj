@@ -89,6 +89,7 @@
     <Compile Include="Messages\Room\CreateObj.cs" />
     <Compile Include="Messages\Room\Empty.cs" />
     <Compile Include="Messages\Room\GenMessage.cs" />
+    <Compile Include="Messages\Room\GetMissingCmd.cs" />
     <Compile Include="Messages\Room\MessageType.cs" />
     <Compile Include="Messages\Room\Quat.cs" />
     <Compile Include="Messages\Room\RpcMsg.cs" />

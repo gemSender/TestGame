@@ -42,14 +42,18 @@ namespace TaskTest.Game
                 maxFrame = frame;
             string pId = msg.PId;
             var player = players.Find(x => x.id == pId);
-            player.session = session;
-            int msgId = msg.MsgId;
-            if (player.nextMsgId <= msgId)
-            {
-                player.nextMsgId = msgId;
-            }
-            for (int i = 0, iMax = players.Count; i < iMax; i++) {
-                players[i].session.Send(msg.ByteBuffer);
+            if (player.GetCommand(msg)) {
+                player.TryRemoveHead();
+                player.session = session;
+                int msgId = msg.MsgId;
+                if (player.nextMsgId <= msgId)
+                {
+                    player.nextMsgId = msgId;
+                }
+                for (int i = 0, iMax = players.Count; i < iMax; i++)
+                {
+                    players[i].session.Send(msg.ByteBuffer);
+                }
             }
         }
 
@@ -83,6 +87,15 @@ namespace TaskTest.Game
             return true;
         }
 
+        public GenMessage GetCommand(string playerId, int frame)
+        {
+            var playerItem = players.Find(x => x.id == playerId);
+            if (playerItem != null)
+            {
+                return playerItem.commands.Find(x => x.Frame == frame);
+            }
+            return null;
+        }
         public int PlayerCount
         {
             get

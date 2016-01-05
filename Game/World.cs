@@ -65,5 +65,14 @@ namespace TaskTest.Game
                 }
             }
         }
+
+        public Room GetRoomByPlayerId(string playerId)
+        {
+            Room ret;
+            if (playerRoomDict.TryGetValue(playerId, out ret)) {
+                return ret;
+            }
+            return null;
+        }
     }
 }

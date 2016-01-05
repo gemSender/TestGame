@@ -37,6 +37,24 @@ namespace TaskTest.ServerFramework
         }
     }
 
+    public class GetMissingCmd : CommandBase<GameSession, UserUdpRequest> 
+    {
+
+        public override void ExecuteCommand(GameSession session, UserUdpRequest requestInfo)
+        {
+            var msg = requestInfo.msg;
+            Room room = World.Instance.GetRoomByPlayerId(session.SessionID);
+            if (room != null) {
+                lock (room) {
+                    var targetCmd = room.GetCommand(session.SessionID, msg.Frame);
+                    if (targetCmd != null) {
+                        session.Send(targetCmd.ByteBuffer);
+                    }
+                }
+            }
+        }
+    }
+
     public class Empty : RoomMessage { }
 }
 
