@@ -31,7 +31,7 @@ namespace TaskTest.Game
                         Console.Write(m.Frame + " ");
                     }
                     Console.WriteLine("SameFrame: " + msg.Frame + " MsgId: " + item.MsgId + " " + msg.MsgId);
-                    return false;
+                    return item.MsgId != msg.MsgId;
                 }
             }
             if (i == -1) {

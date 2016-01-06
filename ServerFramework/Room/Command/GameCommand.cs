@@ -44,9 +44,11 @@ namespace TaskTest.ServerFramework
         {
             var msg = requestInfo.msg;
             Room room = World.Instance.GetRoomByPlayerId(session.SessionID);
+            var bufSeg = msg.GetBufBytes().Value;
+            var playerId = System.Text.Encoding.UTF8.GetString(bufSeg.Array, bufSeg.Offset, bufSeg.Count);
             if (room != null) {
                 lock (room) {
-                    var targetCmd = room.GetCommand(session.SessionID, msg.Frame);
+                    var targetCmd = room.GetCommand(playerId, msg.Frame);
                     if (targetCmd != null) {
                         session.Send(targetCmd.ByteBuffer);
                     }
