@@ -42,7 +42,8 @@ namespace TaskTest.Game
                 maxFrame = frame;
             string pId = msg.PId;
             var player = players.Find(x => x.id == pId);
-            if (player.GetCommand(msg)) {
+            if (player.GetCommand(msg))
+            {
                 player.TryRemoveHead();
                 player.session = session;
                 int msgId = msg.MsgId;
@@ -54,6 +55,10 @@ namespace TaskTest.Game
                 {
                     players[i].session.Send(msg.ByteBuffer);
                 }
+            }
+            else
+            {
+                Console.WriteLine("Ignore Command");
             }
         }
 

@@ -26,6 +26,11 @@ namespace TaskTest.Game
                     return true;
                 }
                 else if (diff == 0) {
+                    Console.Write("StoredFrames: ");
+                    foreach (var m in commands) {
+                        Console.Write(m.Frame + " ");
+                    }
+                    Console.WriteLine("SameFrame: " + msg.Frame + " MsgId: " + item.MsgId + " " + msg.MsgId);
                     return false;
                 }
             }
