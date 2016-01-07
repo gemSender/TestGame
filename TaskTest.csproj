@@ -95,6 +95,8 @@
     <Compile Include="Messages\Room\RpcMsg.cs" />
     <Compile Include="Messages\Room\Vec3.cs" />
     <Compile Include="Messages\World\CreateRoomReply.cs" />
+    <Compile Include="Messages\World\EnterRoomReply.cs" />
+    <Compile Include="Messages\World\EnterRoomResult.cs" />
     <Compile Include="Messages\World\GetRoomListReply.cs" />
     <Compile Include="Messages\World\MessageType.cs" />
     <Compile Include="Messages\World\ReplyMsg.cs" />

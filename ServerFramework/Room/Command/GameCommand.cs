@@ -25,17 +25,17 @@ namespace TaskTest.ServerFramework
 
     public class CreateObj : RoomMessage{}
 
-    public class AddPlayer : RoomMessage
-    {
-        public override void ExecuteCommand(GameSession session, UserUdpRequest requestInfo)
-        {
-            var msg = requestInfo.msg;
-            var arrSeg = msg.GetBufBytes().Value;
-            var roomId = System.Text.Encoding.UTF8.GetString(arrSeg.Array, arrSeg.Offset, arrSeg.Count);
-            Console.WriteLine("Player {0} Enter Room {1}", session.SessionID, roomId);
-            World.Instance.EnterRoom(session, roomId);
-        }
-    }
+    //public class AddPlayer : RoomMessage
+    //{
+    //    public override void ExecuteCommand(GameSession session, UserUdpRequest requestInfo)
+    //    {
+    //        var msg = requestInfo.msg;
+    //        var arrSeg = msg.GetBufBytes().Value;
+    //        var roomId = System.Text.Encoding.UTF8.GetString(arrSeg.Array, arrSeg.Offset, arrSeg.Count);
+    //        Console.WriteLine("Player {0} Enter Room {1}", session.SessionID, roomId);
+    //        World.Instance.EnterRoom(session, roomId);
+    //    }
+    //}
 
     public class GetMissingCmd : CommandBase<GameSession, UserUdpRequest> 
     {

@@ -47,4 +47,46 @@ namespace TaskTest.ServerFramework
             session.Reply(MessageType.GetRoomListReply, msg.MsgId, builder.DataBuffer.GetArraySegment());
         }
     }
+
+    public class EnterRoom : CommandBase<WorldSession, WorldRequest>
+    {
+        public override void ExecuteCommand(WorldSession session, WorldRequest requestInfo)
+        {
+            string playerId = session.SessionID;
+            var msg = requestInfo.msg;
+            var bufseg = msg.GetBuffBytes().Value;
+            string roomId = System.Text.Encoding.UTF8.GetString(bufseg.Array, bufseg.Offset, bufseg.Count);
+            string[] players;
+            var result = World.Instance.EnterRoom(session, roomId, out players);
+            StringOffset[] offsets;
+            FlatBufferBuilder builder = new FlatBufferBuilder(1);
+            if (result == EnterRoomResult.Ok)
+            {   
+                offsets = new StringOffset[players.Length];
+                int roomIdLen = System.Text.Encoding.UTF8.GetByteCount(roomId);
+                int playerIdLen = System.Text.Encoding.UTF8.GetByteCount(playerId);
+                byte[] bytes = new byte[sizeof(int) * 2 + roomIdLen + playerIdLen];
+                int s1 = Utility.Utility.WriteStructToBuffer(roomIdLen, bytes, 0);
+                int s2 = Utility.Utility.WriteStringToBuffer(roomId, bytes, s1);
+                int s3 = Utility.Utility.WriteStructToBuffer(playerIdLen, bytes, s1 + s2);
+                Utility.Utility.WriteStringToBuffer(playerId, bytes, s1 + s2 + s3);
+                for (int i = 0; i < players.Length; i++)
+                {
+                    var pid = players[i];
+                    offsets[i] = builder.CreateString(pid);
+                    if (pid != playerId)
+                    {
+                        var pSession = (session.AppServer as WorldServer).GetSessionByID(pid);
+                        pSession.Reply(MessageType.PlayerEnterRoom, -1, new ArraySegment<byte>(bytes));
+                    }
+                }
+            }
+            else
+            {
+                offsets = new StringOffset[0];
+            }
+            EnterRoomReply.CreateEnterRoomReply(builder, EnterRoomReply.CreatePlayersVector(builder, offsets), result);
+            session.Reply(MessageType.EnterRoomReply, msg.MsgId, builder.DataBuffer.GetArraySegment());
+        }
+    }
 }

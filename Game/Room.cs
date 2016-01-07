@@ -53,7 +53,11 @@ namespace TaskTest.Game
                 }
                 for (int i = 0, iMax = players.Count; i < iMax; i++)
                 {
-                    players[i].session.Send(msg.ByteBuffer);
+                    var sess = players[i].session;
+                    if (sess != null)
+                    {
+                        sess.Send(msg.ByteBuffer);
+                    }
                 }
             }
             else
@@ -62,35 +66,50 @@ namespace TaskTest.Game
             }
         }
 
-        public bool AddPlayer(GameSession session, string playerId)
+        public WorldMessages.EnterRoomResult AddPlayer(string playerId, out string[] outPlayers)
         {
             var playerItem = players.Find(x => x.id == playerId);
             if (playerItem == null)
             {
-                if (players.Count >= Capacity) {
-                    return false;
+                if (players.Count >= Capacity)
+                {
+                    outPlayers = null;
+                    return WorldMessages.EnterRoomResult.OutOfCapacity;
                 }
-                players.Add(new Player() { nextMsgId = 1, id = playerId, session = session });
+
+                players.Add(new Player() { id = playerId, nextMsgId = 1 });
+                outPlayers = new string[players.Count];
+                for (int i = 0; i < players.Count; i++)
+                {
+                    var p = players[i];
+                    outPlayers[i] = p.id;
+                }
+                return WorldMessages.EnterRoomResult.Ok;
             }
             else {
-                playerItem.session = session;
+                outPlayers = null;
+                return WorldMessages.EnterRoomResult.AlreadyIn;
             }
-            if (players.Count == Capacity)
-            {
-                for (int i = 0, iMax = players.Count; i < iMax; i++)
-                {
-                    var item = players[i];
-                    FlatBufferBuilder builder = new FlatBufferBuilder(1);
-                    var vec = GenMessage.CreateGenMessage(builder, MessageType.AddPlayer, builder.CreateString(item.id), 0, Messages.GenMessage.CreateBufVector(builder, new byte[0]), 2);
-                    builder.Finish(vec.Value);
-                    for (int j = 0, jMax = players.Count; j < iMax; j++)
-                    {
-                        players[j].session.Send(builder.DataBuffer);
-                    }
-                }
-            }
-            return true;
         }
+        //public void ReadyForGame(GameSession session, string playerId)
+        //{
+        //    var playerItem = players.Find(x => x.id == playerId);
+        //    if(playerItem != null){
+        //        playerItem.session = session;
+        //        FlatBufferBuilder builder = new FlatBufferBuilder(1);
+        //        var vec = GenMessage.CreateGenMessage(builder, MessageType.ReadyForGame, builder.CreateString(playerId), 0, Messages.GenMessage.CreateBufVector(builder, new byte[0]), 2);
+        //        builder.Finish(vec.Value);
+        //        for (int i = 0, iMax = players.Count; i < iMax; i++)
+        //        {
+        //            var item = players[i];
+
+        //            for (int j = 0, jMax = players.Count; j < iMax; j++) 
+        //            {
+        //                players[j].session.Send(builder.DataBuffer);
+        //            }
+        //        }
+        //    }
+        //}
 
         public GenMessage GetCommand(string playerId, int frame)
         {

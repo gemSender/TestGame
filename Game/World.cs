@@ -41,17 +41,18 @@ namespace TaskTest.Game
             return ret;
         }
 
-        public bool EnterRoom(GameSession session, string id)
+        public WorldMessages.EnterRoomResult EnterRoom(WorldSession session, string id, out string[] players)
         {
             Room room = rooms.Find(x => x.Id == id);
             if (room != null) {
                 playerRoomDict[session.SessionID] = room;
                 lock (room)
                 {
-                    return room.AddPlayer(session, session.SessionID);
+                    return room.AddPlayer(session.SessionID, out players);
                 }
             }
-            return false;
+            players = null;
+            return WorldMessages.EnterRoomResult.RoomNotExists;
         }
 
         public void ProcessCommand(GameSession session, Messages.GenMessage msg)
@@ -73,6 +74,11 @@ namespace TaskTest.Game
                 return ret;
             }
             return null;
+        }
+
+        public Room GetRoom(string roomId)
+        {
+            return rooms.Find(x => x.Id == roomId);
         }
     }
 }
