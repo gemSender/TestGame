@@ -63,13 +63,8 @@ namespace TaskTest.ServerFramework
             if (result == EnterRoomResult.Ok)
             {   
                 offsets = new StringOffset[players.Length];
-                int roomIdLen = System.Text.Encoding.UTF8.GetByteCount(roomId);
-                int playerIdLen = System.Text.Encoding.UTF8.GetByteCount(playerId);
-                byte[] bytes = new byte[sizeof(int) * 2 + roomIdLen + playerIdLen];
-                int s1 = Utility.Utility.WriteStructToBuffer(roomIdLen, bytes, 0);
-                int s2 = Utility.Utility.WriteStringToBuffer(roomId, bytes, s1);
-                int s3 = Utility.Utility.WriteStructToBuffer(playerIdLen, bytes, s1 + s2);
-                Utility.Utility.WriteStringToBuffer(playerId, bytes, s1 + s2 + s3);
+                FlatBufferBuilder fb = new FlatBufferBuilder(1);
+                fb.Finish(PlayerEnterRoom.CreatePlayerEnterRoom(fb, fb.CreateString(roomId), fb.CreateString(playerId)).Value);
                 for (int i = 0; i < players.Length; i++)
                 {
                     var pid = players[i];
@@ -77,7 +72,7 @@ namespace TaskTest.ServerFramework
                     if (pid != playerId)
                     {
                         var pSession = (session.AppServer as WorldServer).GetSessionByID(pid);
-                        pSession.Reply(MessageType.PlayerEnterRoom, -1, new ArraySegment<byte>(bytes));
+                        pSession.Reply(MessageType.PlayerEnterRoom, -1, fb.DataBuffer.GetArraySegment());
                     }
                 }
             }
@@ -85,7 +80,8 @@ namespace TaskTest.ServerFramework
             {
                 offsets = new StringOffset[0];
             }
-            EnterRoomReply.CreateEnterRoomReply(builder, EnterRoomReply.CreatePlayersVector(builder, offsets), result);
+            var vec = EnterRoomReply.CreateEnterRoomReply(builder, EnterRoomReply.CreatePlayersVector(builder, offsets), result);
+            builder.Finish(vec.Value);
             session.Reply(MessageType.EnterRoomReply, msg.MsgId, builder.DataBuffer.GetArraySegment());
         }
     }

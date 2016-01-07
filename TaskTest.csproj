@@ -99,6 +99,7 @@
     <Compile Include="Messages\World\EnterRoomResult.cs" />
     <Compile Include="Messages\World\GetRoomListReply.cs" />
     <Compile Include="Messages\World\MessageType.cs" />
+    <Compile Include="Messages\World\PlayerEnterRoom.cs" />
     <Compile Include="Messages\World\ReplyMsg.cs" />
     <Compile Include="Messages\World\Room.cs" />
     <Compile Include="Messages\World\WorldMessage.cs" />

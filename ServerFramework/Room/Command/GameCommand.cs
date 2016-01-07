@@ -21,6 +21,7 @@ namespace TaskTest.ServerFramework
         }
     }
 
+    public class ReadyForGame : RoomMessage{ }
     public class Rpc : RoomMessage{ }
 
     public class CreateObj : RoomMessage{}
