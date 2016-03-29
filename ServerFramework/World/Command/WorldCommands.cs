@@ -7,9 +7,9 @@ using SuperSocket.SocketBase.Command;
 using SuperSocket.SocketBase.Protocol;
 using SuperSocket.SocketBase;
 using TaskTest.Game;
-using WorldMessages;
+using world_messages;
 using TaskTest.Utility;
-using FlatBuffers;
+using Google.ProtocolBuffers;
 namespace TaskTest.ServerFramework
 {
     public class CreateRoom : CommandBase<WorldSession, WorldRequest>
@@ -17,13 +17,16 @@ namespace TaskTest.ServerFramework
         public override void ExecuteCommand(WorldSession session, WorldRequest requestInfo)
         {
             var msg = requestInfo.msg;
-            var seg = msg.GetBuffBytes().Value;
-            int capacity = BitConverter.ToInt32(seg.Array, seg.Offset);
+            var seg = msg.Buff.ToByteArray();
+            int capacity = BitConverter.ToInt32(seg, 0);
             var room = World.Instance.CreateRoom(session, capacity);
-            FlatBufferBuilder fb = new FlatBufferBuilder(1);
-            var vec = CreateRoomReply.CreateCreateRoomReply(fb, 0, fb.CreateString(room.Id), capacity);
-            fb.Finish(vec.Value);
-            session.Reply(MessageType.CreateRoomReply, msg.MsgId, fb.DataBuffer.GetArraySegment());
+            var replyMsg = MsgCreateRoomReply.CreateBuilder()
+                .SetCapacity(capacity)
+                .SetId(room.Id)
+                .SetErrorCode(0)
+                .Build();
+            var replyBytes = replyMsg.ToByteArray();
+            session.Reply(MessageType.CreateRoomReply, msg.MsgId, new ArraySegment<byte>(replyBytes, 0, replyBytes.Length));
         }
     }
 
@@ -34,17 +37,13 @@ namespace TaskTest.ServerFramework
             var msg = requestInfo.msg;
             var rooms = World.Instance.GetRoomList();
             int len = rooms.Count;
-            FlatBuffers.FlatBufferBuilder builder = new FlatBuffers.FlatBufferBuilder(1);
-            FlatBuffers.Offset<WorldMessages.Room>[] roomOffs = new FlatBuffers.Offset<WorldMessages.Room>[len];
-            for (int i = 0; i < len; i++)
-            {
+            var replyMsgBuilder = MsgGetRoomListReply.CreateBuilder();
+            for (int i = 0; i < len; i++) {
                 var item = rooms[i];
-                var vec = WorldMessages.Room.CreateRoom(builder, builder.CreateString(item.Id), item.PlayerCount, item.Capacity);
-                roomOffs[i] = vec;
+                replyMsgBuilder.AddRooms(world_messages.Room.CreateBuilder().SetId(item.Id).SetPlayerCount(item.PlayerCount).SetCapacity(item.Capacity));
             }
-            var roomListVec = GetRoomListReply.CreateGetRoomListReply(builder, GetRoomListReply.CreateRoomVector(builder, roomOffs));
-            builder.Finish(roomListVec.Value);
-            session.Reply(MessageType.GetRoomListReply, msg.MsgId, builder.DataBuffer.GetArraySegment());
+            var replyBytes = replyMsgBuilder.Build().ToByteArray();
+            session.Reply(MessageType.GetRoomListReply, msg.MsgId, new ArraySegment<byte>(replyBytes, 0, replyBytes.Length));
         }
     }
 
@@ -54,35 +53,27 @@ namespace TaskTest.ServerFramework
         {
             string playerId = session.SessionID;
             var msg = requestInfo.msg;
-            var bufseg = msg.GetBuffBytes().Value;
-            string roomId = System.Text.Encoding.UTF8.GetString(bufseg.Array, bufseg.Offset, bufseg.Count);
+            var bufseg = msg.Buff;
+            string roomId = msg.Buff.ToStringUtf8();
             string[] players;
             var result = World.Instance.EnterRoom(session, roomId, out players);
-            StringOffset[] offsets;
-            FlatBufferBuilder builder = new FlatBufferBuilder(1);
+            var replyBuilder = MsgEnterRoomReply.CreateBuilder().SetResult(result);
             if (result == EnterRoomResult.Ok)
-            {   
-                offsets = new StringOffset[players.Length];
-                FlatBufferBuilder fb = new FlatBufferBuilder(1);
-                fb.Finish(PlayerEnterRoom.CreatePlayerEnterRoom(fb, fb.CreateString(roomId), fb.CreateString(playerId)).Value);
+            {
+                var pushMsg = MsgPlayerEnterRoom.CreateBuilder().SetPlayerId(playerId).SetRoomId(roomId).Build().ToByteArray();
                 for (int i = 0; i < players.Length; i++)
                 {
                     var pid = players[i];
-                    offsets[i] = builder.CreateString(pid);
+                    replyBuilder.AddPlayers(pid);
                     if (pid != playerId)
                     {
                         var pSession = (session.AppServer as WorldServer).GetSessionByID(pid);
-                        pSession.Reply(MessageType.PlayerEnterRoom, -1, fb.DataBuffer.GetArraySegment());
+                        pSession.Reply(MessageType.PlayerEnterRoom, -1, new ArraySegment<byte>(pushMsg, 0, pushMsg.Length));
                     }
                 }
             }
-            else
-            {
-                offsets = new StringOffset[0];
-            }
-            var vec = EnterRoomReply.CreateEnterRoomReply(builder, EnterRoomReply.CreatePlayersVector(builder, offsets), result);
-            builder.Finish(vec.Value);
-            session.Reply(MessageType.EnterRoomReply, msg.MsgId, builder.DataBuffer.GetArraySegment());
+            var bytes = replyBuilder.Build().ToByteArray();
+            session.Reply(MessageType.EnterRoomReply, msg.MsgId, new ArraySegment<byte>(bytes, 0, bytes.Length));
         }
     }
 }

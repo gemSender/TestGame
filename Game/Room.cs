@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Messages;
-using FlatBuffers;
+using messages;
+using Google.ProtocolBuffers;
 using TaskTest.ServerFramework;
 namespace TaskTest.Game
 {
@@ -35,7 +35,7 @@ namespace TaskTest.Game
             return room;
         }
 
-        public void GetMessage(GameSession session, Messages.GenMessage msg)
+        public void GetMessage(GameSession session, messages.GenMessage msg)
         {
             int frame = msg.Frame;
             if (maxFrame < frame)
@@ -51,12 +51,13 @@ namespace TaskTest.Game
                 {
                     player.nextMsgId = msgId;
                 }
+                var msgBytes = msg.ToByteArray();
                 for (int i = 0, iMax = players.Count; i < iMax; i++)
                 {
                     var sess = players[i].session;
                     if (sess != null)
                     {
-                        sess.Send(msg.ByteBuffer);
+                        sess.Send(msgBytes, 0, msgBytes.Length);
                     }
                 }
             }
@@ -66,7 +67,7 @@ namespace TaskTest.Game
             }
         }
 
-        public WorldMessages.EnterRoomResult AddPlayer(string playerId, out string[] outPlayers)
+        public world_messages.EnterRoomResult AddPlayer(string playerId, out string[] outPlayers)
         {
             var playerItem = players.Find(x => x.id == playerId);
             if (playerItem == null)
@@ -74,7 +75,7 @@ namespace TaskTest.Game
                 if (players.Count >= Capacity)
                 {
                     outPlayers = null;
-                    return WorldMessages.EnterRoomResult.OutOfCapacity;
+                    return world_messages.EnterRoomResult.OutOfCapacity;
                 }
 
                 players.Add(new Player() { id = playerId, nextMsgId = 1 });
@@ -84,11 +85,11 @@ namespace TaskTest.Game
                     var p = players[i];
                     outPlayers[i] = p.id;
                 }
-                return WorldMessages.EnterRoomResult.Ok;
+                return world_messages.EnterRoomResult.Ok;
             }
             else {
                 outPlayers = null;
-                return WorldMessages.EnterRoomResult.AlreadyIn;
+                return world_messages.EnterRoomResult.AlreadyIn;
             }
         }
         //public void ReadyForGame(GameSession session, string playerId)

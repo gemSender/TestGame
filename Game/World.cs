@@ -41,7 +41,7 @@ namespace TaskTest.Game
             return ret;
         }
 
-        public WorldMessages.EnterRoomResult EnterRoom(WorldSession session, string id, out string[] players)
+        public world_messages.EnterRoomResult EnterRoom(WorldSession session, string id, out string[] players)
         {
             Room room = rooms.Find(x => x.Id == id);
             if (room != null) {
@@ -52,10 +52,10 @@ namespace TaskTest.Game
                 }
             }
             players = null;
-            return WorldMessages.EnterRoomResult.RoomNotExists;
+            return world_messages.EnterRoomResult.RoomNotExists;
         }
 
-        public void ProcessCommand(GameSession session, Messages.GenMessage msg)
+        public void ProcessCommand(GameSession session, messages.GenMessage msg)
         { 
             Room room;
             if (playerRoomDict.TryGetValue(session.SessionID, out room))

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
-using FlatBuffers;
+using Google.ProtocolBuffers;
 using TaskTest.Game;
 using SuperSocket.SocketBase;
 
@@ -12,9 +12,10 @@ namespace TaskTest.ServerFramework
 {
     public class GameSession : AppSession<GameSession, UserUdpRequest>
     {
-        public bool Send(ByteBuffer bb)
+        public bool Send(IMessage msg)
         {
-            return TrySend(bb.Data, bb.Position, bb.Length - bb.Position);
+            var bytes = msg.ToByteArray();
+            return TrySend(bytes, 0, bytes.Length);
         }
     }
 }

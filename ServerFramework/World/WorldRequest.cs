@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using SuperSocket.SocketBase.Protocol;
 using GameCommand;
-using WorldMessages;
-using FlatBuffers;
+using world_messages;
+using Google.ProtocolBuffers;
 
 namespace TaskTest.ServerFramework
 {
@@ -24,8 +24,7 @@ namespace TaskTest.ServerFramework
 
         public static WorldRequest Decode(byte[] buff, int offset, int length)
         {
-            ByteBuffer bb = new ByteBuffer(buff, offset);
-            WorldMessage msg = WorldMessage.GetRootAsWorldMessage(bb);
+            WorldMessage msg = WorldMessage.ParseFrom(ByteString.CopyFrom(buff, offset, length));
             return new WorldRequest(msg.Type, msg.PlayerId) { msg = msg};
         }
     }

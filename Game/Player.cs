@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskTest.ServerFramework;
-using Messages;
+using messages;
 namespace TaskTest.Game
 {
     public class Player
@@ -14,7 +14,7 @@ namespace TaskTest.Game
         public string id;
         public GameSession session;
         public int lastFrame;
-        public List<Messages.GenMessage> commands = new List<Messages.GenMessage>();
+        public List<messages.GenMessage> commands = new List<messages.GenMessage>();
         public bool GetCommand(GenMessage msg)
         {
             int i = 0;

@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using SuperSocket.SocketBase.Protocol;
 using GameCommand;
-using Messages;
-using FlatBuffers;
+using messages;
+using Google.ProtocolBuffers;
 
 namespace TaskTest.ServerFramework
 {
     public class UserUdpRequest : UdpRequestInfo
     {
-        public Messages.GenMessage msg
+        public messages.GenMessage msg
         {
             get;
             private set;
@@ -23,8 +23,7 @@ namespace TaskTest.ServerFramework
 
         public static UserUdpRequest Decode(byte[] src, int offset, int length)
         {
-            ByteBuffer bb = new ByteBuffer(src, offset);
-            Messages.GenMessage msg = Messages.GenMessage.GetRootAsGenMessage(bb);
+            var msg = GenMessage.ParseFrom(ByteString.CopyFrom(src, offset, length));
             return new UserUdpRequest(msg.MsgType, msg.PId) { msg = msg};
         }
         
